@@ -16,9 +16,8 @@ import { NotImplementedError } from '../extensions/index.js';
  */
 export default function calculateHanoi(disksNumber, turnsSpeed) {
   let turns = (2 ** disksNumber) - 1;
-  let obj = {
+  return {
     turns: turns,
     seconds: Math.floor(turns / turnsSpeed * 60 * 60),
   };
-  return obj;
 }

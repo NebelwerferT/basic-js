@@ -23,7 +23,22 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function minesweeper (matrix) {
+  let graph = {}; let resArr = [];
+  matrix.forEach((elem, i) => (elem.forEach((elem2, j) => {graph[`${i};${j}`] = elem2;})));
+  for (let key in graph) {
+    let sum = 0;
+    let [row, column] = [...key.split(";").map(elem => +elem)];
+    if (graph[`${row};${column + 1}`] === true) sum++;
+    if (graph[`${row};${column - 1}`] === true) sum++;
+    if (graph[`${row + 1};${column}`] === true) sum++;
+    if (graph[`${row - 1};${column}`] === true) sum++;
+    if (graph[`${row + 1};${column + 1}`] === true) sum++;
+    if (graph[`${row - 1};${column - 1}`] === true) sum++;
+    if (graph[`${row + 1};${column - 1}`] === true) sum++;
+    if (graph[`${row - 1};${column + 1}`] === true) sum++;
+    if(resArr.length - 1 < row) resArr.push([]);
+    resArr[row][column] = sum;
+  }
+  return resArr;
 }
